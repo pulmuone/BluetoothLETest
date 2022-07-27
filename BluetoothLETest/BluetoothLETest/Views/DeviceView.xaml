@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BluetoothLETest.Views.DeviceView"
+             BackgroundColor="White"
+             Title="Device"
+             xmlns:vm="clr-namespace:BluetoothLETest.ViewModels">
+    <ContentPage.BindingContext>
+        <vm:DeviceViewModel></vm:DeviceViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+
+                <Button x:Name="btnStatus" Text="Status" Clicked="btnStatus_Clicked"/>
+                <Button x:Name="btnScan" Text="1.Scan" Clicked="btnScan_Clicked"/>
+                <Button x:Name="btnStopScan" Text="StopScan" Clicked="btnStopScan_Clicked"/>
+                <Label x:Name="txtErrorBle" Text=""></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnConnect" Text="2.Connect" Clicked="btnConnect_Clicked"/>
+                <Button x:Name="btnKnowConnect" Text="Connect know device" Clicked="btnKnowConnect_Clicked"/>
+                <Button x:Name="btnDisConnect" Text="DisConnect" Clicked="btnDisConnect_Clicked"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="btnGetServices" Text="3.Get list of services" Clicked="btnGetServices_Clicked"/>
+            </StackLayout>
+            <!--<StackLayout Orientation="Horizontal">
+                <Button x:Name="btnGetcharacters" Text="Get characteristics" Clicked="btnGetcharacters_Clicked"/>
+                <Button x:Name="btnGetRW" Text="Read/Write" Clicked="btnGetRW_Clicked"/>
+            </StackLayout>-->
+            <StackLayout Orientation="Horizontal" >
+                <Button x:Name="btnStartUpdate" Text="4.StartUpdate" Clicked="btnStartUpdate_Clicked"/>
+                <Button x:Name="btnStopUpdate" Text="StopUpdate" Clicked="btnStopUpdate_Clicked"/>
+            </StackLayout>
+            <StackLayout>
+                <Label x:Name="ScanResult"/>
+            </StackLayout>
+
+            <ListView x:Name="lv" ItemSelected="lv_ItemSelected" SeparatorColor="Aqua">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem CommandParameter="{Binding .}" IsDestructive="True" Text="Disconnect" Clicked="btnDisConnect_Clicked"/>
+                            </ViewCell.ContextActions>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding Id}" TextColor="Black"/>
+                                <Label Grid.Row="1" Grid.Column="0" Text="{Binding Name}" TextColor="Black"/>
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Rssi}" TextColor="Black"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
